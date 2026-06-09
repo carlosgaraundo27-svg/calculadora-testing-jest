@@ -1,0 +1,26 @@
+{
+  "name": "calculadora-testing-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosgaraundo27-svg/calculadora-testing-jest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/carlosgaraundo27-svg/calculadora-testing-jest/issues"
+  },
+  "homepage": "https://github.com/carlosgaraundo27-svg/calculadora-testing-jest#readme",
+  "devDependencies": {
+    "jest": "^30.4.2"
+  }
+}
