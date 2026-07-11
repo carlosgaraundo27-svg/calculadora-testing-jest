@@ -5,7 +5,7 @@ describe('Calculadora Básica', () => {
     describe('sumar()', () => {
         test('2 + 3 debe ser 5', () => {
             // ARRANGE
-            const a = 2, b = 3;
+            const a = 2, b = 2;
             // ACT
             const resultadoSuma = sumar(a, b);
             // ASSERT
