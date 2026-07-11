@@ -1,0 +1,43 @@
+# .github/workflows/sonarcloud.yml
+# Pipeline: análisis de calidad con SonarCloud en cada Push
+
+name: CI — SonarCloud Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonarcloud:
+    name: Análisis SonarCloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # SonarCloud necesita el historial completo
+
+      - name: Instalar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Generar el reporte de cobertura para SonarCloud
+      - name: Generar cobertura
+        run: npm run test:coverage
+
+      # Enviar el análisis a SonarCloud
+      - name: Análisis SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
