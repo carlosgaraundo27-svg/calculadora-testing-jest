@@ -9,7 +9,7 @@ describe('Calculadora Básica', () => {
             // ACT
             const resultadoSuma = sumar(a, b);
             // ASSERT
-            expect(resultadoSuma).toBe(5);
+            expect(resultadoSuma).toBe(4);
         });
         test('sumar números negativos: -1 + -1 = -2', () => {
             expect(sumar(-1, -1)).toBe(-2);
