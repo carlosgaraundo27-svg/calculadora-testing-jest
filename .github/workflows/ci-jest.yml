@@ -5,11 +5,16 @@ name: CI — Tests + Quality Gate
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-jest-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test-y-calidad:
@@ -25,20 +30,19 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm ci --ignore-scripts
 
-      # Ejecutar tests y verificar umbrales de cobertura.
-      # Si la cobertura baja del 70%, este paso falla y el pipeline queda en rojo.
       - name: Tests + Quality Gate de cobertura
         run: npm run test:coverage
 
-      # Subir el reporte HTML como artefacto descargable.
       - name: Subir reporte de cobertura
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/lcov-report/
+          if-no-files-found: ignore
           retention-days: 7
