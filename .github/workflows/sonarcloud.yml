@@ -5,11 +5,16 @@ name: CI — SonarCloud Quality Gate
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarcloud-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   sonarcloud:
@@ -20,24 +25,23 @@ jobs:
       - name: Descargar código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # SonarCloud necesita el historial completo
+          fetch-depth: 0
 
       - name: Instalar Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm ci --ignore-scripts
 
-      # Generar el reporte de cobertura para SonarCloud
       - name: Generar cobertura
         run: npm run test:coverage
 
-      # Enviar el análisis a SonarCloud
       - name: Análisis SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
