@@ -9,15 +9,20 @@
     "test:coverage": "jest --coverage"
   },
   "jest": {
-"coverageThreshold": {
-"global": {
-"statements": 70,
-"branches": 70,
-"functions": 70,
-"lines": 70
-}
-}},
-
+    "coverageThreshold": {
+      "global": {
+        "statements": 70,
+        "branches": 70,
+        "functions": 70,
+        "lines": 70
+      }
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/e2e/"
+    ] 
+  },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carlosgaraundo27-svg/calculadora-testing-jest.git"
@@ -31,6 +36,7 @@
   },
   "homepage": "https://github.com/carlosgaraundo27-svg/calculadora-testing-jest#readme",
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "jest": "^30.4.2"
   }
 }
