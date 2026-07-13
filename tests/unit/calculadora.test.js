@@ -5,11 +5,11 @@ describe('Calculadora Básica', () => {
     describe('sumar()', () => {
         test('2 + 3 debe ser 5', () => {
             // ARRANGE
-            const a = 2, b = 2;
+            const a = 5, b = 10;
             // ACT
             const resultadoSuma = sumar(a, b);
             // ASSERT
-            expect(resultadoSuma).toBe(4);
+            expect(resultadoSuma).toBe(15);
         });
         test('sumar números negativos: -1 + -1 = -2', () => {
             expect(sumar(-1, -1)).toBe(-2);
