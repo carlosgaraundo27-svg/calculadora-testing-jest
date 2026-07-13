@@ -1,4 +1,4 @@
-const { sumar, restar, multiplicar, dividir } = require('../../src/calculadora/calculadora');
+const { sumar, restar, multiplicar, dividir } = require('../calculadora/calculadora');
 // 'describe' agrupa pruebas relacionadas, como una carpeta
 describe('Calculadora Básica', () => {
 //funcion suma
